@@ -70,90 +70,65 @@ public class DIEnchantmentRegistry {
     }
 
     public static boolean areCompatible(PetEnchantment e1, Enchantment e2) {
-        if(e1 == HEALTH_BOOST) {
-            return e2 != HEALTH_SIPHON;
+        switch (e1) {
+            case HEALTH_BOOST:
+                return e2 != HEALTH_SIPHON;
+            case FIREPROOF:
+                return e2 != POISON_RESISTANCE && e2 != FROST_FANG && e2 != AMPHIBIOUS;
+            case IMMUNITY_FRAME:
+                return e2 != DEFLECTION && e2 != BLAZING_PROTECTION;
+            case DEFLECTION:
+                return e2 != IMMUNITY_FRAME && e2 != DEFUSAL && e2 != PSYCHIC_WALL && e2 != BLAZING_PROTECTION;
+            case POISON_RESISTANCE:
+                return e2 != FIREPROOF;
+            case CHAIN_LIGHTNING:
+                return e2 != FROST_FANG && e2 != MAGNETIC && e2 != BUBBLING && e2 != SHADOW_HANDS;
+            case FROST_FANG:
+                return e2 != CHAIN_LIGHTNING && e2 != FIREPROOF && e2 != BUBBLING && e2 != WARPING_BITE && e2 != BLAZING_PROTECTION;
+            case MAGNETIC:
+                return e2 != CHAIN_LIGHTNING && e2 != SHEPHERD && e2 != VAMPIRE && e2 != SHADOW_HANDS && e2 != PSYCHIC_WALL && e2 != INTIMIDATION;
+            case TOTAL_RECALL:
+                return e2 != UNDEAD_CURSE;
+            case HEALTH_SIPHON:
+                return e2 != HEALTH_BOOST && e2 != VAMPIRE && e2 != GLUTTONOUS  && e2 != HEALING_AURA;
+            case BUBBLING:
+                return e2 != CHAIN_LIGHTNING && e2 != FROST_FANG && e2 != SHADOW_HANDS && e2 != WARPING_BITE;
+            case SHEPHERD:
+                return e2 != MAGNETIC && e2 != ORE_SCENTING && e2 != PSYCHIC_WALL && e2 != BLIGHT_CURSE;
+            case AMPHIBIOUS:
+                return e2 != FIREPROOF && e2 != BLAZING_PROTECTION;
+            case VAMPIRE:
+                return e2 != MAGNETIC && e2 != HEALTH_SIPHON && e2 != GLUTTONOUS  && e2 != HEALING_AURA;
+            case UNDEAD_CURSE:
+                return e2 != TOTAL_RECALL;
+            case SHADOW_HANDS:
+                return e2 != CHAIN_LIGHTNING && e2 != MAGNETIC && e2 != BUBBLING && e2 != DISK_JOCKEY && e2 != BLAZING_PROTECTION;
+            case DISK_JOCKEY:
+                return e2 != SHADOW_HANDS && e2 != MUFFLED && e2 != BLAZING_PROTECTION;
+            case DEFUSAL:
+                return e2 != DEFLECTION;
+            case WARPING_BITE:
+                return e2 != FROST_FANG && e2 != BUBBLING;
+            case ORE_SCENTING:
+                return e2 != SHEPHERD;
+            case GLUTTONOUS:
+                return e2 != VAMPIRE && e2 != HEALTH_SIPHON;
+            case PSYCHIC_WALL:
+                return e2 != MAGNETIC && e2 != DEFLECTION && e2 != SHEPHERD;
+            case INTIMIDATION:
+                return e2 != MAGNETIC && e2 != WARPING_BITE;
+            case BLIGHT_CURSE:
+                return e2 != SHEPHERD;
+            case MUFFLED:
+                return e2 != DISK_JOCKEY;
+            case BLAZING_PROTECTION:
+                return e2 != IMMUNITY_FRAME && e2 != DEFLECTION && e2 != AMPHIBIOUS && e2 != FROST_FANG && e2 != SHADOW_HANDS && e2 != DISK_JOCKEY;
+            case HEALING_AURA:
+                return e2 != REJUVENATION && e2 != VAMPIRE && e2 != HEALTH_SIPHON;
+            case REJUVENATION:
+                return e2 != HEALING_AURA && e2 != HEALTH_SIPHON;
+            default:
+                return true;
         }
-        if(e1 == FIREPROOF){
-            return e2 != POISON_RESISTANCE && e2 != FROST_FANG && e2 != AMPHIBIOUS;
-        }
-        if(e1 == IMMUNITY_FRAME){
-            return e2 != DEFLECTION && e2 != BLAZING_PROTECTION;
-        }
-        if(e1 == DEFLECTION){
-            return e2 != IMMUNITY_FRAME && e2 != DEFUSAL && e2 != PSYCHIC_WALL && e2 != BLAZING_PROTECTION;
-        }
-        if(e1 == POISON_RESISTANCE){
-            return e2 != FIREPROOF;
-        }
-        if(e1 == CHAIN_LIGHTNING){
-            return e2 != FROST_FANG && e2 != MAGNETIC && e2 != BUBBLING && e2 != SHADOW_HANDS;
-        }
-        if(e1 == FROST_FANG){
-            return e2 != CHAIN_LIGHTNING && e2 != FIREPROOF && e2 != BUBBLING && e2 != WARPING_BITE && e2 != BLAZING_PROTECTION;
-        }
-        if(e1 == MAGNETIC){
-            return e2 != CHAIN_LIGHTNING && e2 != SHEPHERD && e2 != VAMPIRE && e2 != SHADOW_HANDS && e2 != PSYCHIC_WALL && e2 != INTIMIDATION;
-        }
-        if(e1 == TOTAL_RECALL){
-            return e2 != UNDEAD_CURSE;
-        }
-        if(e1 == HEALTH_SIPHON){
-            return e2 != HEALTH_BOOST && e2 != VAMPIRE && e2 != GLUTTONOUS  && e2 != HEALING_AURA;
-        }
-        if(e1 == BUBBLING){
-            return e2 != CHAIN_LIGHTNING && e2 != FROST_FANG && e2 != SHADOW_HANDS && e2 != WARPING_BITE;
-        }
-        if(e1 == SHEPHERD){
-            return e2 != MAGNETIC && e2 != ORE_SCENTING && e2 != PSYCHIC_WALL && e2 != BLIGHT_CURSE;
-        }
-        if(e1 == AMPHIBIOUS){
-            return e2 != FIREPROOF && e2 != BLAZING_PROTECTION;
-        }
-        if(e1 == VAMPIRE){
-            return e2 != MAGNETIC && e2 != HEALTH_SIPHON && e2 != GLUTTONOUS  && e2 != HEALING_AURA;
-        }
-        if(e1 == UNDEAD_CURSE){
-            return e2 != TOTAL_RECALL;
-        }
-        if(e1 == SHADOW_HANDS){
-            return e2 != CHAIN_LIGHTNING && e2 != MAGNETIC && e2 != BUBBLING && e2 != DISK_JOCKEY && e2 != BLAZING_PROTECTION;
-        }
-        if(e1 == DISK_JOCKEY){
-            return e2 != SHADOW_HANDS && e2 != MUFFLED && e2 != BLAZING_PROTECTION;
-        }
-        if(e1 == DEFUSAL){
-            return e2 != DEFLECTION;
-        }
-        if(e1 == WARPING_BITE){
-            return e2 != FROST_FANG && e2 != BUBBLING;
-        }
-        if(e1 == ORE_SCENTING){
-            return e2 != SHEPHERD;
-        }
-        if(e1 == GLUTTONOUS){
-            return e2 != VAMPIRE && e2 != HEALTH_SIPHON;
-        }
-        if(e1 == PSYCHIC_WALL){
-            return e2 != MAGNETIC && e2 != DEFLECTION && e2 != SHEPHERD;
-        }
-        if(e1 == INTIMIDATION){
-            return e2 != MAGNETIC && e2 != WARPING_BITE;
-        }
-        if(e1 == BLIGHT_CURSE){
-            return e2 != SHEPHERD;
-        }
-        if(e1 == MUFFLED){
-            return e2 != DISK_JOCKEY;
-        }
-        if(e1 == BLAZING_PROTECTION){
-            return e2 != IMMUNITY_FRAME && e2 != DEFLECTION && e2 != AMPHIBIOUS && e2 != FROST_FANG && e2 != SHADOW_HANDS && e2 != DISK_JOCKEY;
-        }
-        if(e1 == HEALING_AURA){
-            return e2 != REJUVENATION && e2 != VAMPIRE && e2 != HEALTH_SIPHON;
-        }
-        if(e1 == REJUVENATION){
-            return e2 != HEALING_AURA && e2 != HEALTH_SIPHON;
-        }
-        return true;
     }
 }
